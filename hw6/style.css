@@ -1,7 +1,18 @@
 #dashbord{
     height: 80px;
-    background-color: gray;
+    background-color: lightsteelblue;
     text-align: center;
     font-size: 50px;
     padding-top: 10px;
+}
+
+.searchresults{
+    border-style: groove;
+    width: 210px;
+    height: 50px;
+    background-color: khaki;
+}
+
+p #txt{
+    color: white;  
 }
