@@ -35,10 +35,10 @@ function getCurrentCity(cityName){
  fetch("https://api.openweathermap.org/data/2.5/onecall?lat=" + lat + "&lon=" + lon + "&exclude={alert}&appid=" + apiKey).then(function(response){
     return response.json()
  }).then(function(data){
-     console.log(data)
-     showWeather(data)
-    //  showFiveDaysIcon(data)
-    //  showFiveDaysTemp(data)
+     console.log(data);
+     showWeather(data);
+     showFiveDaysIcon(data);
+     showFiveDaysTemp(data);
  })
 }
 //get the lat and long of each city
@@ -62,14 +62,14 @@ fetch(geoUrl).then(function(response){
 })
 }
 
-function getFiveDays(cityName){
-   var fiveDayUrl = "api.openweathermap.org/data/2.5/forecast?q=" + cityName + "&appid=" + apiKey;
-   fetch(fiveDayUrl).then(function(response){
-    return response.json()  
+// function getFiveDays(cityName){
+//    var fiveDayUrl = "api.openweathermap.org/data/2.5/forecast?q=" + cityName + "&appid=" + apiKey;
+//    fetch(fiveDayUrl).then(function(response){
+//     return response.json()  
   
-  }).then(function(data){
-      console.log(data)
-})
+//   }).then(function(data){
+//       console.log(data)
+// })
 
 //saves input to local storage and appends to "save box"
 function saveToLocal(){
@@ -94,30 +94,31 @@ console.log(data)
 }
 
 
-//  function showFiveDaysIcon(data){
-//     var iconEL1 = document.getElementById("icon1")
-//     var iconEL2 = document.getElementById("icon2")
-//     var iconEL3 = document.getElementById("icon3")
-//     var iconEL4 = document.getElementById("icon4")
-//     var iconEL5 = document.getElementById("icon5")
+ function showFiveDaysIcon(data){
+    var iconEL1 = document.getElementById("icon1")
+    var iconEL2 = document.getElementById("icon2")
+    var iconEL3 = document.getElementById("icon3")
+    var iconEL4 = document.getElementById("icon4")
+    var iconEL5 = document.getElementById("icon5")
 
-//     iconEL1.append(data.current.weather[0].icon);
-//     iconEL2.append(data.current.weather[0].icon);
-//     iconEL3.append(data.current.weather[0].icon);
-//     iconEL4.append(data.current.weather[0].icon);
-//     iconEL5.append(data.current.weather[0].icon);
-//  }
+    iconEL1.append(data.current.weather[0].icon);
+    iconEL2.append(data.current.weather[0].icon);
+    iconEL3.append(data.current.weather[0].icon);
+    iconEL4.append(data.current.weather[0].icon);
+    iconEL5.append(data.current.weather[0].icon);
+    return;
+ }
 
-//  function showFiveDaysTemp(data){
-//     var temp5DayEL1 = document.getElementById("5daytemp1");
-//     var temp5DayEL2 = document.getElementById("5daytemp2");
-//     var temp5DayEL3 = document.getElementById("5daytemp3");
-//     var temp5DayEL4 = document.getElementById("5daytemp4");
-//     var temp5DayEL5 = document.getElementById("5daytemp5");
+ function showFiveDaysTemp(data){
+    var temp5DayEL1 = document.getElementById("5daytemp1");
+    var temp5DayEL2 = document.getElementById("5daytemp2");
+    var temp5DayEL3 = document.getElementById("5daytemp3");
+    var temp5DayEL4 = document.getElementById("5daytemp4");
+    var temp5DayEL5 = document.getElementById("5daytemp5");
 
-//     temp5DayEL1.append(data.daily[0].temp.day)
-//     temp5DayEL2.append(data.daily[0].temp.day)
-//     temp5DayEL3.append(data.daily[0].temp.day)
-//     temp5DayEL4.append(data.daily[0].temp.day)
-//     temp5DayEL5.append(data.daily[0].temp.day)
+    temp5DayEL1.append(data.daily[0].temp.day)
+    temp5DayEL2.append(data.daily[0].temp.day)
+    temp5DayEL3.append(data.daily[0].temp.day)
+    temp5DayEL4.append(data.daily[0].temp.day)
+    temp5DayEL5.append(data.daily[0].temp.day)
 }
