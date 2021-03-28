@@ -1,18 +1,106 @@
 #dashbord{
     height: 80px;
-    background-color: lightsteelblue;
+    width: 1050px;
+    background-color: lightslategray;
     text-align: center;
     font-size: 50px;
     padding-top: 10px;
 }
 
-.searchresults{
-    border-style: groove;
-    width: 210px;
-    height: 50px;
-    background-color: khaki;
+.search-results{
+    border-style: hidden;
+    width: 230px;
+    height: 500px;
+    background-color: lightgray;
 }
 
-p #txt{
-    color: white;  
+.save-box{
+    border-style:solid;
+    border-width: 1px;
+    height: 40px;
+    width: 220px;
+    background-color: whitesmoke;
+    position: relative;
+    left: 5px;
+    top: 5px;
 }
+
+.city-info{
+    height: 300px;
+    width: 800px;
+    border-style: solid;
+    border-color: whitesmoke;
+    position: relative;
+    left: 250px; 
+    bottom: 500px;
+}
+
+h2{
+    position: relative;
+    left: 250px;
+    bottom: 500px;
+}
+
+
+
+#day1{
+border-style: solid;
+height: 200px;
+border-color:blue;
+background: blue;
+width: 150px;
+position: relative;
+bottom: 500px;
+left: 250px;
+}
+
+
+#day2{
+    border-style: solid;
+    height: 200px;
+    background: blue;
+    border-color: blue;   
+    width: 150px;
+    position: relative;
+    bottom: 87px;
+    left: 200px;
+    } 
+
+#day3{
+    border-style: solid;
+    border-color: blue;    
+    background: blue;
+    height: 200px;
+    width: 150px;
+    position: relative;
+    bottom: 87px;
+    left: 200px;
+     }
+     
+     #day4{
+        border-style: solid;
+        height: 200px;
+        background: blue;
+        border-color: blue;
+        width: 150px;
+        position: relative;
+        bottom: 87px;
+        left: 200px;
+        }
+        
+     #day5{
+        border-style: solid;
+        height: 200px;
+        border-color: blue;
+        background: blue;
+        width: 150px;
+        position: relative;
+        bottom: 87px;
+        left: 200px;
+        }
+            
+            footer p{
+              color: azure;  
+              top: 80px;
+              position: relative;
+            }
