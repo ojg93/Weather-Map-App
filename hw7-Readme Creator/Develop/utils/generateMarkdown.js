@@ -4,7 +4,7 @@ function renderLicenseBadge(license) {
   if (license === true){
     return `[![License: ${license}]`
 
-  } else return ""
+  } else return ''
   
 }
 
