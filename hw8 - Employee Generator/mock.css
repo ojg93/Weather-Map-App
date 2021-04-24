@@ -1,0 +1,27 @@
+.my-team {
+    border-style: solid;
+    border-color: rgb(226, 107, 107);
+    height: 200px;
+    text-align: center;
+    font-size: 40px;
+    background-color: rgb(226, 107, 107);
+    font-family: monospace;
+}
+
+#card{
+    padding: 10px;
+    margin: 30px;
+    border-style: solid;
+    width: 175px;
+    height: 225px;
+    border-width: 1px;
+}
+
+.card-head{
+    padding: 15px;
+    border-style: solid;
+    background-color: rgb(44, 170, 224);
+    
+    
+
+}

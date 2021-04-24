@@ -1,78 +1,46 @@
-// TODO: Create a function that returns a license badge based on which license is passed in
-// If there is no license, return an empty string
-function renderLicenseBadge(license) {
-  if (license === true){
-    return `[![License: ${license}]`
+function makeHtml(){
+    return `
+    <!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>MOCK HTML</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="mock.css">
+    </head>
+    <body>
+        <div class ="my-team">
+            <h2> My Team</h2>
+        </div>
 
-  } else return ""
-  
+        ${makeCards()}
+        
+        <script src="" async defer></script>
+    </body>
+</html>`
+};
+
+function makeCards(){
+    return`
+<div id="card">
+    <div class="card-head">
+    <h4></h4>
+     <h5></h5>   
+    </div>
+    <div class="card" style="width: 18rem;">
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item">An item</li>
+          <li class="list-group-item">A second item</li>
+          <li class="list-group-item">A third item</li>
+        </ul>
+      </div>
+</div>`
 }
 
-// TODO: Create a function that returns the license link
-// If there is no license, return an empty string
-function renderLicenseLink(license, color) {
-  if (license === true){
-    return "(https://img.shields.io/badge/License-" + (license) + (color) + ".svg)]"
-    
-  } else return "" 
-  
+
+module.exports = {
+    makeHtml,
+    makeCards
 }
-
-// TODO: Create a function that returns the license section of README
-// If there is no license, return an empty string
-function renderLicenseSection(license) {
-  if (license === true){
-    return //license section of readme
-
-  } else return ""
-  
-}
-
-
-// TODO: Create a function to generate markdown for README
-function generateMarkdown(data) {
-  return `
-  
-  ## *TABLE OF CONTENTS*
-            
-  - [Title](#title) 
-  - [Username](#username) 
-  - [Description](#description) 
-  - [Email](#email) 
-  - [installation](#installatio
-  - [License](#license)
-  - [Usage](#usage) 
-  - [Contribution](#contribution)  
-  - [Tests](#tests) 
-
-          
-  ## TITLE:
-  ${data.title}
-         
-  ## username:
-  ${data.username}
-         
-  ## description:
-  ${data.description}
-          
-  ## email:
-  ${data.email}
-          
-  ## test:
-  ${data.test}
-
-  ## license:
-  ${data.license}
-          
-  ## contrbution:
-  ${data.contribution}
-          
-  ## usage:
-  ${data.usage}
-          
-  ## installation: 
-  ${data.installation}
-`;
-}
-
-module.exports = generateMarkdown;
