@@ -1,7 +1,11 @@
 // TODO: Include packages needed for this application
 const fs = require("fs");
 const inquirer = require("inquirer");
-const generateMarkdown = require("./utils/generateMarkdown");
+const manager = require('./utils/manager')
+const engineer = require('./utils/engineer')
+const intern = require('./utils/intern')
+const path = require('path')
+
 
 const answersArray = [];
 

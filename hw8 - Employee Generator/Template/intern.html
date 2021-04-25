@@ -1,13 +1,13 @@
 <div id="card">
     <div class="card-head">
-    <h4></h4>
-     <h5></h5>   
+    <h4>{{ name }}</h4>
+     <h5>{{ role }}</h5>   
     </div>
     <div class="card" style="width: 18rem;">
         <ul class="list-group list-group-flush">
-          <li class="list-group-item">Username:</li>
-          <li class="list-group-item">School:</li>
-          <li class="list-group-item">Email:</li>
+          <li class="list-group-item">Username: {{ username }}</li>
+          <li class="list-group-item">School: {{ school }}</li>
+          <li class="list-group-item">Email: <a href="mailto:{{ email }}"> {{ email }} </a></li>
         </ul>
       </div>
 </div>
