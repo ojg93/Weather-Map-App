@@ -4,32 +4,36 @@ const fs = require("fs");
 let templates = path.resolve(__dirname, "../template");
 
 //making a function that renders all employees
-let finalRender = (employees) => {
-  let htmlTemplate = [];
-  htmlTemplate.push(
-    ...employees.filter((employee) => employee.getrole() === "manager")
-    .map((manager) => {
-        managerRenderer(manager).join('')
-    })
-  );
-
-  htmlTemplate.push(
-    ...employees.filter((employee) => employee.getrole() === "engineer")
-    .map((engineer) => {
-        engineerRenderer(engineer).join('')
-    })
-  );
-
-  htmlTemplate.push(
-    ...employees.filter((employee) => employee.getrole() === "intern")
-    .map((intern) => {
-        internRenderer(intern).join('')
-    })
-  );
-
-  return mainRenderer(html.join(''))
-};
+const render = (employees) => {
+ const htmlTemplate = [];
  
+ htmlTemplate.push(
+    ...employees
+      .filter((employee) => employee.getrole() === "manager")
+      .map((manager) => {
+        managerRenderer(manager).join("");
+      })
+  );
+
+  htmlTemplate.push(
+    ...employees
+      .filter((employee) => employee.getrole() === "engineer")
+      .map((engineer) => {
+        engineerRenderer(engineer).join("");
+      })
+  );
+
+  htmlTemplate.push(
+    ...employees
+      .filter((employee) => employee.getrole() === "intern")
+      .map((intern) => {
+        internRenderer(intern).join("");
+      })
+  );
+
+  return mainRenderer(html.join(""));
+};
+
 const managerRenderer = (manager) => {
   let temp = fs.readFileSync(path.resolve(templates, "manager.html"), "utf8");
   temp = replacer(temp, "name", manager.getName());
@@ -37,7 +41,7 @@ const managerRenderer = (manager) => {
   temp = replacer(temp, "id", manager.getId());
   temp = replacer(temp, "officeNumber", manager.getOfficeNumber());
   temp = replacer(temp, "email", manager.getEmail());
-  return temp
+  return temp;
 };
 
 const internRenderer = (intern) => {
@@ -47,7 +51,7 @@ const internRenderer = (intern) => {
   temp = replacer(temp, "id", intern.getId());
   temp = replacer(temp, "school", intern.getSchool());
   temp = replacer(temp, "email", intern.getEmail());
-  return temp
+  return temp;
 };
 
 const engineerRenderer = (engineer) => {
@@ -57,7 +61,7 @@ const engineerRenderer = (engineer) => {
   temp = replacer(temp, "id", engineer.getId());
   temp = replacer(temp, "github", engineer.getGithub());
   temp = replacer(temp, "email", engineer.getEmail());
-  return temp
+  return temp;
 };
 
 const mainRenderer = (html) => {
@@ -70,4 +74,4 @@ const replacer = (temp, placeholder, value) => {
   return temp.replace(structure, value);
 };
 
-module.exports = htmlrender;
+module.exports = render;
