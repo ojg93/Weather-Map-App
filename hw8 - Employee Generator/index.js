@@ -1,9 +1,9 @@
 // TODO: Include packages needed for this application
 const fs = require("fs");
 const inquirer = require("inquirer");
-const manager = require("./utils/manager");
-const engineer = require("./utils/engineer");
-const intern = require("./utils/intern");
+const Manager = require("./utils/manager");
+const Engineer = require("./utils/engineer");
+const Intern = require("./utils/intern");
 const path = require("path");
 const render = require("./utils/htmlRender");
 
@@ -140,7 +140,7 @@ function appMenu() {
         },
       ])
       .then((answers) => {
-        const engineer = new Manager(
+        const engineer = new Engineer(
           answers.engineer,
           answers.engineerId,
           answers.engineerUsername,
@@ -166,17 +166,17 @@ function appMenu() {
 
 appMenu();
 
-// function endQuestion() {
-//   inquirer
-//     .prompt({
-//       type: "list",
-//       message: "Would you like to add another employee?",
-//       name: "endQuestion",
-//       choices: ["yes", "no"],
-//     })
-//     .then((answer) => {
-//       if (answer.endQuestion === "yes") {
-//         startQuestion();
-//       } else console.log("this is the end");
-//     });
-// }
+function endQuestion() {
+  inquirer
+    .prompt({
+      type: "list",
+      message: "Would you like to add another employee?",
+      name: "endQuestion",
+      choices: ["yes", "no"],
+    })
+    .then((answer) => {
+      if (answer.endQuestion === "yes") {
+        startQuestion();
+      } else console.log("this is the end");
+    });
+}
