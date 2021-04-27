@@ -1,38 +1,29 @@
 const path = require("path");
 const fs = require("fs");
+let templates = path.resolve(__dirname, "../Template");
 
-let templates = path.resolve(__dirname, "../template");
 
 //making a function that renders all employees
 const render = (employees) => {
  const htmlTemplate = [];
- 
  htmlTemplate.push(
     ...employees
-      .filter((employee) => employee.getrole() === "manager")
-      .map((manager) => {
-        managerRenderer(manager).join("");
-      })
+      .filter((employee) => employee.getRole() === "Manager")
+      .map((manager) => managerRenderer(manager)).join("")
   );
-
   htmlTemplate.push(
     ...employees
-      .filter((employee) => employee.getrole() === "engineer")
-      .map((engineer) => {
-        engineerRenderer(engineer).join("");
-      })
+      .filter((employee) => employee.getRole() === "Engineer")
+      .map((engineer) => engineerRenderer(engineer)).join("")
   );
-
   htmlTemplate.push(
     ...employees
-      .filter((employee) => employee.getrole() === "intern")
-      .map((intern) => {
-        internRenderer(intern).join("");
-      })
+      .filter((employee) => employee.getRole() === "Intern")
+      .map((intern) => internRenderer(intern)).join("")
   );
-
-  return mainRenderer(html.join(""));
+  return mainRenderer(htmlTemplate.join(""));
 };
+
 
 const managerRenderer = (manager) => {
   let temp = fs.readFileSync(path.resolve(templates, "manager.html"), "utf8");
@@ -44,6 +35,7 @@ const managerRenderer = (manager) => {
   return temp;
 };
 
+
 const internRenderer = (intern) => {
   let temp = fs.readFileSync(path.resolve(templates, "intern.html"), "utf8");
   temp = replacer(temp, "name", intern.getName());
@@ -53,6 +45,7 @@ const internRenderer = (intern) => {
   temp = replacer(temp, "email", intern.getEmail());
   return temp;
 };
+
 
 const engineerRenderer = (engineer) => {
   let temp = fs.readFileSync(path.resolve(templates, "engineer.html"), "utf8");
@@ -65,13 +58,30 @@ const engineerRenderer = (engineer) => {
 };
 
 const mainRenderer = (html) => {
-  const temp = fs.readFileSync(path.resolve(template, "main.html"), "utf8");
-  return replacer(temp, "index", html);
+  const temp = fs.readFileSync(path.resolve(templates, "main.html"), "utf8");
+  return replacer(temp, "layout", html);
 };
 
 const replacer = (temp, placeholder, value) => {
-  const structure = new RegExp("{{" + placeholder + "}}", "gm");
+  const structure = new RegExp("{{ " + placeholder + " }}", "gm");
   return temp.replace(structure, value);
 };
 
+
+
 module.exports = render;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

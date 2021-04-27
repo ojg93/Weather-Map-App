@@ -1,4 +1,4 @@
-// TODO: Include packages needed for this application
+//TODO: Include packages needed for this application
 const fs = require("fs");
 const inquirer = require("inquirer");
 const Manager = require("./utils/manager");
@@ -6,12 +6,13 @@ const Engineer = require("./utils/engineer");
 const Intern = require("./utils/intern");
 const path = require("path");
 const render = require("./utils/htmlRender");
+const outputDir = path.resolve(__dirname, "Output");
+const outputPath = path.join(outputDir, "layout.html");
 
-const outputDir = path.resolve(__dirname, "output");
-const outputPath = path.join(outputDir, "Layout.html");
 
 const groupMembers = [];
 const idArray = [];
+
 
 function appMenu() {
   function askManager() {
@@ -20,7 +21,7 @@ function appMenu() {
         {
           type: "input",
           message: "Who is the manager of the project?",
-          name: "manager",
+          name: "managerName",
         },
         {
           type: "input",
@@ -30,7 +31,7 @@ function appMenu() {
         {
           type: "input",
           message: "What is their office number",
-          name: "officenumber",
+          name: "managerOfficeNumber",
         },
         {
           type: "input",
@@ -40,9 +41,9 @@ function appMenu() {
       ])
       .then((answers) => {
         const manager = new Manager(
-          answers.manager,
+          answers.managerName,
           answers.managerId,
-          answers.officeNumber,
+          answers.managerOfficeNumber,
           answers.managerEmail
         );
         console.log(answers);
@@ -52,7 +53,6 @@ function appMenu() {
         // endQuestion();
       });
   }
-
   function startQuestion() {
     inquirer
       .prompt([
@@ -60,21 +60,21 @@ function appMenu() {
           type: "list",
           message: "Which employee would you like to add?",
           name: "startQuestion",
-          choices: ["intern", "manager", "engineer"],
+          choices: ["Intern", "Engineer", "Exit"],
         },
       ])
       .then((answers) => {
         switch (answers.startQuestion) {
-          case "engineer":
+          case "Engineer":
             askEngineer();
             break;
-          case "intern":
+          case "Intern":
             askIntern();
             break;
           default:
             buildGroup();
         }
-      });
+      })
   }
   function askIntern() {
     inquirer
@@ -82,30 +82,30 @@ function appMenu() {
         {
           type: "input",
           message: "What is the interns name?",
-          name: "intern",
-        },
-        {
-          type: "input",
-          message: "What school did they attend?",
-          name: "school",
+          name: "internName",
         },
         {
           type: "input",
           message: "What is their email address?",
-          name: "interEmail",
+          name: "internEmail",
         },
         {
           type: "input",
-          message: "What is their github username? ",
-          name: "internUsername",
+          message: "What school did they attend?",
+          name: "internSchool",
+        },
+        {
+          type: "input",
+          message: "What is their github username?",
+          name: "internGithub",
         },
       ])
       .then((answers) => {
         const intern = new Intern(
-          answers.intern,
-          answers.school,
+          answers.internName,
           answers.internEmail,
-          answers.internUsername
+          answers.internSchool,
+          answers.internGithub
         );
         console.log(answers);
         groupMembers.push(intern);
@@ -114,14 +114,13 @@ function appMenu() {
         // endQuestion();
       });
   }
-
   function askEngineer() {
     inquirer
       .prompt([
         {
           type: "input",
           message: "What is the engineers name?",
-          name: "engineer",
+          name: "engineerName",
         },
         {
           type: "input",
@@ -136,15 +135,15 @@ function appMenu() {
         {
           type: "input",
           message: "What is their github username? ",
-          name: "engineerUsername",
+          name: "engineerGithub",
         },
       ])
       .then((answers) => {
         const engineer = new Engineer(
-          answers.engineer,
+          answers.engineerName,
           answers.engineerId,
-          answers.engineerUsername,
-          answers.managerEmail
+          answers.engineerEmail,
+          answers.engineerGithub
         );
         console.log(answers);
         groupMembers.push(engineer);
@@ -153,7 +152,6 @@ function appMenu() {
         // endQuestion();
       });
   }
-
   function buildGroup() {
     if (!fs.existsSync(outputDir)) {
       fs.mkdirSync(outputDir);
@@ -163,20 +161,18 @@ function appMenu() {
   }
   askManager();
 }
-
 appMenu();
-
-function endQuestion() {
-  inquirer
-    .prompt({
-      type: "list",
-      message: "Would you like to add another employee?",
-      name: "endQuestion",
-      choices: ["yes", "no"],
-    })
-    .then((answer) => {
-      if (answer.endQuestion === "yes") {
-        startQuestion();
-      } else console.log("this is the end");
-    });
-}
+// function endQuestion() {
+//   inquirer
+//     .prompt({
+//       type: "list",
+//       message: "Would you like to add another employee?",
+//       name: "endQuestion",
+//       choices: ["yes", "no"],
+//     })
+//     .then((answer) => {
+//       if (answer.endQuestion === "yes") {
+//         startQuestion();
+//       } else console.log("this is the end");
+//     });
+// }
