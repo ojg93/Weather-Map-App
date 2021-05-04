@@ -1,6 +1,7 @@
 const mysql = require("mysql");
 const inquirer = require("inquirer");
-const cTable = require("console.table");
+const cTable = require('console.table');
+
 
 // create the connection information for the sql database
 const connection = mysql.createConnection({
@@ -13,55 +14,65 @@ const connection = mysql.createConnection({
 
 //INQUIRER QUESTIONS
 function mainTasks() {
-  inquirer.prompt([
-    {
-      type: "list",
-      message: "What would you like to do?",
-      name: "mainTasks",
-      choices: [
-        "VIEW all employess?",
-        "VIEW all employees by MANAGER",
-        "VIEW all employees by DEPARTMENT",
-        "Exit",
-      ],
-    },
-  ]);
+  inquirer
+    .prompt([
+      {
+        type: "list",
+        message: "What would you like to do?",
+        name: "mainTasks",
+        choices: [
+          "VIEW all EMPLOYEES",
+          "VIEW all ROLES",
+          "VIEW all DEPARTMENTS",
+          "VIEW all employees by MANAGER",
+          "Exit",
+        ],
+      },
+    ])
+    .then((answers) => {
+      switch (answers.mainTasks) {
+        case "VIEW all EMPLOYEES":
+          viewAllEmp();
+          break;
+        case "VIEW all ROLES":
+          viewAllRoles();
+          break;
+        default:
+          console.log("Your input was submitted");
+      }
+    });
 }
-// .then((answers) => {
-//   switch (answers.mainTasks) {
-//     case "VIEW all employees":
-//       // askEngineer();
-//       break;
-//     case "VIEW all employees by MANAGER":
-//       // askIntern();
-//       break;
-//     default:
-//       // buildGroup();
-//   }
-// })
 
 //Create function to show "VIEW ALL EMPLOYEES"
-function viewAllEmp() {
-  connection.query('SELECT * FROM employees', (err, res) => {
+const viewAllEmp = () => {
+  connection.query("SELECT * FROM employee", (err, res) => {
     if (err) throw err;
-    console.log(res);
+    console.table(res);
     connection.end();
   });
 };
 
 //Create function to show "VIEW ALL EMPLOYEES BY MANAGER"
-function viewAllManager() {
-  connection.query('SELECT * FROM employees', (err, res) => {
+const viewAllRoles = () => {
+  connection.query("SELECT * FROM role", (err, res) => {
     if (err) throw err;
-    console.log(res);
+    console.table(res);
     connection.end();
   });
 };
 ////Create function to show "VIEW ALL EMPLOYEES BY DEPARTMENT"
 function viewAllDepartment() {
-  connection.query('SELECT * FROM employees', (err, res) => {
+  connection.query("SELECT * FROM department", (err, res) => {
     if (err) throw err;
     console.log(res);
     connection.end();
   });
-};
+}
+
+
+// connect to the mysql server and sql database
+connection.connect((err) => {
+  if (err) throw err;
+  
+mainTasks();
+})
