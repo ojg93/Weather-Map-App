@@ -21,7 +21,7 @@ app.get("/api/notes", (req, res) => {
   let notesData = JSON.parse(fs.readFileSync("./db/db.json", "utf8"));
   res.send(notesData)
 })
-ç
+
 app.post("/api/notes", (req, res) => {
   let notesData = JSON.parse(fs.readFileSync("./db/db.json", "utf8"));
   let newNote = req.body;
