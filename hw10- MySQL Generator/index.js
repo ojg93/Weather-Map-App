@@ -127,10 +127,10 @@ const addDepartment = () => {
     ])
     .then((answer) => {
       connection.query(
-        "INSERT INTO role SET ?",
+        "INSERT INTO department SET ?",
 
         {
-          first_name: answer.department,
+          name: answer.department,
         },
         (err) => {
           if (err) throw err;
@@ -167,7 +167,7 @@ const addEmployee = () => {
     ])
     .then((answer) => {
       connection.query(
-        "INSERT INTO role SET ?",
+        "INSERT INTO employee SET ?",
 
         {
           first_name: answer.first,
