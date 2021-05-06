@@ -1,7 +1,6 @@
 const mysql = require("mysql");
 const inquirer = require("inquirer");
-const cTable = require('console.table');
-
+const cTable = require("console.table");
 
 // create the connection information for the sql database
 const connection = mysql.createConnection({
@@ -24,55 +23,170 @@ function mainTasks() {
           "VIEW all EMPLOYEES",
           "VIEW all ROLES",
           "VIEW all DEPARTMENTS",
-          "VIEW all employees by MANAGER",
+          "add ROLE",
+          "add DEPARTMENT",
+          "add EMPLOYEE",
           "Exit",
         ],
       },
     ])
     .then((answers) => {
-      switch (answers.mainTasks) {
-        case "VIEW all EMPLOYEES":
-          viewAllEmp();
-          break;
-        case "VIEW all ROLES":
-          viewAllRoles();
-          break;
-        default:
-          console.log("Your input was submitted");
+      if (answers.mainTasks === "VIEW all EMPLOYEES") {
+        viewAllEmp();
       }
+      if (answers.mainTasks === "VIEW all ROLES") {
+        viewAllRoles();
+      }
+      if (answers.mainTasks === "VIEW all DEPARTMENTS") {
+        viewAllDepartment();
+      }
+      if (answers.mainTasks === "add ROLE") {
+        addRole();
+      }
+      if (answers.mainTasks === "add DEPARTMENT") {
+        addDepartment();
+      }
+      if (answers.mainTasks === "add EMPLOYEE") {
+        addEmployee();
+      } else console.log("thank you for your submissions");
     });
 }
 
 //Create function to show "VIEW ALL EMPLOYEES"
 const viewAllEmp = () => {
-  connection.query("SELECT * FROM employee", (err, res) => {
+  connection.query("SELECT * FROM employee;", (err, res) => {
     if (err) throw err;
     console.table(res);
     connection.end();
   });
 };
 
-//Create function to show "VIEW ALL EMPLOYEES BY MANAGER"
+//Create function to show "VIEW ALL ROLES"
 const viewAllRoles = () => {
-  connection.query("SELECT * FROM role", (err, res) => {
+  connection.query("SELECT * FROM role;", (err, res) => {
     if (err) throw err;
     console.table(res);
     connection.end();
   });
 };
-////Create function to show "VIEW ALL EMPLOYEES BY DEPARTMENT"
+//Create function to show "VIEW ALL DEPARTMENT"
 function viewAllDepartment() {
-  connection.query("SELECT * FROM department", (err, res) => {
+  connection.query("SELECT * FROM department;", (err, res) => {
     if (err) throw err;
-    console.log(res);
+    console.table(res);
     connection.end();
   });
 }
 
+//function thats adds ROLE
+const addRole = () => {
+  inquirer
+    .prompt([
+      {
+        name: "title",
+        type: "input",
+        message: "What is the role you would like to add?",
+      },
+      {
+        name: "salary",
+        type: "input",
+        message: "What is the salary of the role?",
+      },
+      {
+        name: "departmentId",
+        type: "input",
+        message: "What is the Id of the role?",
+      },
+    ])
+    .then((answer) => {
+      connection.query(
+        "INSERT INTO role SET ?",
+
+        {
+          title: answer.title,
+          salary: answer.salary,
+          department_id: answer.departmentId,
+        },
+        (err) => {
+          if (err) throw err;
+          console.log("Your role was created successfully!");
+          mainTasks()
+        }
+      );
+    });
+};
+//function thats adds DEPARTMENT
+const addDepartment = () => {
+  inquirer
+    .prompt([
+      {
+        name: "department",
+        type: "input",
+        message: "What is the department you would like to add?",
+      },
+    ])
+    .then((answer) => {
+      connection.query(
+        "INSERT INTO role SET ?",
+
+        {
+          first_name: answer.department,
+        },
+        (err) => {
+          if (err) throw err;
+          console.log("Your department was created successfully!");
+          mainTasks()
+        }
+      );
+    });
+};
+//function thats adds EMPLOYEE
+const addEmployee = () => {
+  inquirer
+    .prompt([
+      {
+        name: "first",
+        type: "input",
+        message: "What is the first name of the employee?",
+      },
+      {
+        name: "last",
+        type: "input",
+        message: "What is the last name of the employee?",
+      },
+      {
+        name: "roleId",
+        type: "input",
+        message: "What is the role id",
+      },
+      {
+        name: "managerId",
+        type: "input",
+        message: "What is the managerId?",
+      },
+    ])
+    .then((answer) => {
+      connection.query(
+        "INSERT INTO role SET ?",
+
+        {
+          first_name: answer.first,
+          last_name: answer.last,
+          role_id: answer.roleId,
+          manager_id: answer.managerId,
+        },
+        (err) => {
+          if (err) throw err;
+          console.log("Your department was created successfully!");
+          mainTasks()
+        }
+      );
+    });
+};
 
 // connect to the mysql server and sql database
 connection.connect((err) => {
   if (err) throw err;
-  
-mainTasks();
-})
+
+  mainTasks();
+});

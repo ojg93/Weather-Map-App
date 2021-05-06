@@ -1,6 +1,7 @@
 --mysql -u root -p--
 --ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'Thesameone93'
 
+
 DROP DATABASE IF EXISTS companyGenerator_DB;
 CREATE DATABASE companyGenerator_DB;
 
