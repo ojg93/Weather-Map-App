@@ -77,3 +77,11 @@ INSERT INTO role (title, salary, department_id)
 VALUES ("Design Manager", 102000, 70);
 INSERT INTO role (title, salary, department_id)
 VALUES ("Head Writer", 95000, 80); 
+
+SELECT employee.first_name, employee.last_name, role.title
+FROM role
+INNER JOIN employee ON role.id=employee.id
+
+UPDATE role
+SET title = 'Alfred Schmidt', City= 'Frankfurt'
+WHERE id = 1;

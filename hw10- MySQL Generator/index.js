@@ -1,6 +1,8 @@
 const mysql = require("mysql");
 const inquirer = require("inquirer");
 const cTable = require("console.table");
+// const path = require("path")
+// require("dotenv").config({ path: "../.env" });
 
 // create the connection information for the sql database
 const connection = mysql.createConnection({
@@ -26,6 +28,7 @@ function mainTasks() {
           "add ROLE",
           "add DEPARTMENT",
           "add EMPLOYEE",
+          "update ROLE",
           "Exit",
         ],
       },
@@ -48,33 +51,42 @@ function mainTasks() {
       }
       if (answers.mainTasks === "add EMPLOYEE") {
         addEmployee();
+      }
+      if (answers.mainTasks === "update ROLE") {
+        updateRole();
       } else console.log("thank you for your submissions");
+      connection.end();
     });
 }
-
 //Create function to show "VIEW ALL EMPLOYEES"
 const viewAllEmp = () => {
-  connection.query("SELECT * FROM employee;", (err, res) => {
-    if (err) throw err;
-    console.table(res);
-    connection.end();
-  });
+  connection.query(
+    "SELECT employee.first_name, employee.last_name, role.title, role.salary, role.department_id,  employee.role_id, employee.manager_id FROM role INNER JOIN employee ON role.id=employee.id;",
+    (err, res) => {
+      if (err) throw err;
+      console.table(res);
+      mainTasks();
+    }
+  );
 };
 
 //Create function to show "VIEW ALL ROLES"
 const viewAllRoles = () => {
-  connection.query("SELECT * FROM role;", (err, res) => {
-    if (err) throw err;
-    console.table(res);
-    connection.end();
-  });
+  connection.query(
+    "SELECT employee.first_name, employee.last_name, role.title FROM role INNER JOIN employee ON role.id=employee.id",
+    (err, res) => {
+      if (err) throw err;
+      console.table(res);
+      mainTasks();
+    }
+  );
 };
 //Create function to show "VIEW ALL DEPARTMENT"
 function viewAllDepartment() {
   connection.query("SELECT * FROM department;", (err, res) => {
     if (err) throw err;
     console.table(res);
-    connection.end();
+    mainTasks();
   });
 }
 
@@ -110,7 +122,7 @@ const addRole = () => {
         (err) => {
           if (err) throw err;
           console.log("Your role was created successfully!");
-          mainTasks()
+          mainTasks();
         }
       );
     });
@@ -135,7 +147,7 @@ const addDepartment = () => {
         (err) => {
           if (err) throw err;
           console.log("Your department was created successfully!");
-          mainTasks()
+          mainTasks();
         }
       );
     });
@@ -178,7 +190,44 @@ const addEmployee = () => {
         (err) => {
           if (err) throw err;
           console.log("Your department was created successfully!");
-          mainTasks()
+          mainTasks();
+        }
+      );
+    });
+};
+
+const updateRole = () => {
+  inquirer
+    .prompt([
+      {
+        name: "updateId",
+        type: "input",
+        message: "What is id of the employee you want to update?",
+      },
+      {
+        name: "updateTitle",
+        type: "input",
+        message: "What is the new role?",
+      },
+      {
+        name: "updateSalary",
+        type: "input",
+        message: "What is the new Salary?",
+      },
+    ])
+    .then((answer) => {
+      connection.query(
+        `UPDATE role SET title = '${answer.updateTitle}', salary= '${answer.updateSalary}' WHERE id = ${answer.updateId}`,
+
+        {
+          id: answer.updateId,
+          title: answer.updateTitle,
+          salary: answer.updateSalary,
+        },
+        (err) => {
+          if (err) throw err;
+          console.log("Employee Updated!");
+          mainTasks();
         }
       );
     });
