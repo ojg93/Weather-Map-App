@@ -1,8 +1,9 @@
 const mysql = require("mysql");
 const inquirer = require("inquirer");
 const cTable = require("console.table");
-// const path = require("path")
-// require("dotenv").config({ path: "../.env" });
+const path = require("path")
+require("dotenv").config({ path: ".env" });
+
 
 // create the connection information for the sql database
 const connection = mysql.createConnection({
