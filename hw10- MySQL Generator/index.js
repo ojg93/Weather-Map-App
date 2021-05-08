@@ -54,9 +54,11 @@ function mainTasks() {
       }
       if (answers.mainTasks === "update ROLE") {
         updateRole();
-      } else console.log("thank you for your submissions");
-      connection.end();
+      } 
+      else console.log("thank you for your submissions");
+      
     });
+    connection.end()
 }
 //Create function to show "VIEW ALL EMPLOYEES"
 const viewAllEmp = () => {
@@ -217,13 +219,8 @@ const updateRole = () => {
     ])
     .then((answer) => {
       connection.query(
-        `UPDATE role SET title = '${answer.updateTitle}', salary= '${answer.updateSalary}' WHERE id = ${answer.updateId}`,
-
-        {
-          id: answer.updateId,
-          title: answer.updateTitle,
-          salary: answer.updateSalary,
-        },
+        "UPDATE role SET title = ?, salary= ? WHERE id = ?",
+        [answer.updateTitle, answer.updateSalary, answer.updateId],
         (err) => {
           if (err) throw err;
           console.log("Employee Updated!");
