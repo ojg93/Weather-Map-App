@@ -59,12 +59,13 @@ function mainTasks() {
       else console.log("thank you for your submissions");
       
     });
-    connection.end()
+    
 }
+
 //Create function to show "VIEW ALL EMPLOYEES"
 const viewAllEmp = () => {
   connection.query(
-    "SELECT employee.first_name, employee.last_name, role.title, role.salary, role.department_id,  employee.role_id, employee.manager_id FROM role INNER JOIN employee ON role.id=employee.id;",
+    "SELECT employee.first_name, employee.last_name, role.title, role.salary, role.department_id, employee.role_id, employee.manager_id FROM role INNER JOIN employee ON role.department_id=employee.role_id;",
     (err, res) => {
       if (err) throw err;
       console.table(res);
@@ -110,7 +111,7 @@ const addRole = () => {
       {
         name: "departmentId",
         type: "input",
-        message: "What is the Id of the role?",
+        message: "What is the department Id?",
       },
     ])
     .then((answer) => {

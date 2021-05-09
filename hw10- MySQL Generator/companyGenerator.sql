@@ -32,21 +32,21 @@ id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
 
 --SEEDS--
 INSERT INTO employee (first_name, last_name, role_id, manager_id)
-VALUES ("Jaq", "Brown", 1, 12);
+VALUES ("Jaq", "Brown", 10, 12);
 INSERT INTO employee (first_name, last_name, role_id, manager_id)
-VALUES ("Norman", "Corlett", 2, 23);
+VALUES ("Norman", "Corlett", 20, 23);
 INSERT INTO employee (first_name, last_name, role_id, manager_id)
-VALUES ("Khafre", "Grampus", 3, 34);
+VALUES ("Khafre", "Grampus", 30, 34);
 INSERT INTO employee (first_name, last_name, role_id, manager_id)
-VALUES ("Keith", "Black", 4, 45);
+VALUES ("Keith", "Black", 40, 45);
 INSERT INTO employee (first_name, last_name, role_id, manager_id)
-VALUES ("selina", "Gomez", 5, 56);
+VALUES ("selina", "Gomez", 50, 56);
 INSERT INTO employee (first_name, last_name, role_id, manager_id)
-VALUES ("Chanel", "Westbrook", 6, 67);
+VALUES ("Chanel", "Westbrook", 60, 67);
 INSERT INTO employee (first_name, last_name, role_id, manager_id)
-VALUES ("Harper", "Stevenson", 7, 78);
+VALUES ("Harper", "Stevenson", 70, 78);
 INSERT INTO employee (first_name, last_name, role_id, manager_id)
-VALUES ("Eva", "Long", 8, 89);
+VALUES ("Eva", "Long", 80, 89);
 
 --DEPARTMENT--
 INSERT INTO department (first_name)
